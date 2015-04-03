@@ -1,0 +1,16 @@
+
+1) In folder where code is, create a folder called data. This is where the json files get created.
+
+
+2) Run the code with python 3. Because I am running the code with Python 3 I had to change the print statements from print "test" to print("test") That is all I changed.
+I went with Python3 because I was getting a byte string error with Python 2.7.
+
+To start the twitter collection:
+python3 streaming.py
+
+3) The code dumps JSON files into the data folder.
+For scaling reference:
+For DC/Baltimore area: At 9pm on Thursday the rate for geo-tweets was 400 tweets every 4.5 mins ~ 1MB JSON.
+
+4) To work with the JSON files
+
