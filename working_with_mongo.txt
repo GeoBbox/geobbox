@@ -1,0 +1,56 @@
+
+Set up mongo per instructions. I used these resources to assist me:
+http://stats.seandolinar.com/collecting-twitter-data-storing-tweets-in-mongodb/
+http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
+
+Because mongo requires a data/db folder on root, despite installing mongo in a usr/local dir
+you may have to use sudo to make data/db directory on root and any time you run mongo commands
+in a terminal shell
+
+
+
+
+1) Launch mongo using:
+sudo mongodb/bin/mongod
+
+or to launch it from your usr local install and to access a local database you specify: 
+sudo mongodb/bin/mongod  --dbpath ./mongodb/data
+
+Note: type Ctrl-C in order to quit
+
+
+2) In another terminal window launch the mongo console:
+sudo mongodb/bin/mongo
+
+Note: type exit in order to quit
+
+- to create a new database type: use nameofdb
+e.g. use geobbox1
+
+
+
+3) To load a single json file into database: open new terminal
+sudo mongodb/bin/mongoimport --file ./mongodb/data/staging/tweetsample.json
+
+may need to try the array part, I did not need it though:
+sudo  mongodb/bin/mongoimport -d geobbox1 -c tweetsample --file ./mongodb/data/staging/tweetsample.json --jsonArray
+
+
+4) To do a batch import or to add more documents to a collection from json
+use the python batchjson2mongo.py
+
+
+5) Review content - in mongo console
+- to see the collections created
+show collections
+
+- find out how many documents in collection:
+db.nameofcollection.count()
+
+- to read one document in a collection
+db.tweetsample.findOne()
+
+- to see first 20 documents use find or specify a limit
+db.tweetsample.find()
+db.tweetsample.find().limit(5)
+
