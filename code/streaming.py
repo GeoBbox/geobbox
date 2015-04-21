@@ -27,18 +27,12 @@ api = tweepy.API(auth)
 
 
 def main(mode=1):
-    # track = ['pizza']
-    # follow = []
-
     listen = SListener(api, 'test')
     stream = tweepy.Stream(auth, listen)
 
-    # on %s users and %s keywords..." % (len(track), len(follow))
     print ("Streaming started, type Ctrl-C to quit")
 
     try:
-        # stream.filter(track = track, follow = follow) # for keywords or users
-
         # for bounding box LLlong,Lat, URLong, Lat of DC area
         stream.filter(locations=[-78.17, 38.33, -76.36, 39.38])
 
