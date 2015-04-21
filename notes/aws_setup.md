@@ -8,13 +8,12 @@ Setup S3 bucket
 
 ## Setup of EC2 instance
 
-Login:
+Login (note, we do not have a reserved IP address, so if the machine is stopped, you will need to go into the console to get the new IP address.)
 ```
 ssh -i geobbox.pem ubuntu@52.6.36.180
 ```
 
 Run the following commands...
-
 ```
 sudo apt-get install git
 git clone git@github.com:GeoBbox/geobbox.git
