@@ -1,29 +1,28 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Apr  2 18:30:22 2015
-
-@author: girloffroad
 Based on: http://nbviewer.ipython.org/github/alexhanna/hse-twitter/blob/master/docs/Collecting%20Twitter%20data%20from%20the%20API%20with%20Python.ipynb
 """
 
-import tweepy 
 from tweepy import API
 from tweepy import StreamListener
-import json, time, sys
+import json
+import time
+import sys
+
 
 class SListener(StreamListener):
 
-    def __init__(self, api = None, fprefix = 'streamer'):
+    def __init__(self, api=None, fprefix='streamer'):
         self.api = api or API()
         self.counter = 0
         self.fprefix = fprefix
-        self.output  = open('data/' + fprefix + '.' 
-                            + time.strftime('%Y%m%d-%H%M%S') + '.json', 'w')
-        self.delout  = open('data/delete.txt', 'a')
+        self.output = open('data/' + fprefix + '.'
+                           + time.strftime('%Y%m%d-%H%M%S') + '.json', 'w')
+        self.delout = open('data/delete.txt', 'a')
 
     def on_data(self, data):
 
-        if  'in_reply_to_status' in data:
+        if 'in_reply_to_status' in data:
             self.on_status(data)
         elif 'delete' in data:
             delete = json.loads(data)['delete']['status']
@@ -35,23 +34,23 @@ class SListener(StreamListener):
         elif 'warning' in data:
             warning = json.loads(data)['warnings']
             print (warning['message'])
-            return false
+            return False
 
     def on_status(self, status):
         self.output.write(status + "\n")
 
         self.counter += 1
 
-        if self.counter >= 200: #20000
+        if self.counter >= 200:  # 20000
             self.output.close()
-            self.output = open('data/' + self.fprefix + '.' 
+            self.output = open('data/' + self.fprefix + '.'
                                + time.strftime('%Y%m%d-%H%M%S') + '.json', 'w')
             self.counter = 0
 
         return
 
     def on_delete(self, status_id, user_id):
-        self.delout.write( str(status_id) + "\n")
+        self.delout.write(str(status_id) + "\n")
         return
 
     def on_limit(self, track):
