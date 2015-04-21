@@ -55,11 +55,19 @@ cd ~/geobbox/geobbox/code/
 add2virtualenv .
 ```
 
+Install requirements.
+```
+cd ~/geobbox/geobbox/code/
+pip install -r requirements.txt
+```
+
 At this point, you should be able to run streamer.py.
 ```
 cd ~/geobbox/geobbox/code/
-python streamer.py
+python streaming.py
 ```
 
-
-
+If you log in and you want to kick off the streaming script, you must activate the environment first. To do this, run the following BEFORE you run `python streaming.py`.
+```
+workon geobbox
+```
