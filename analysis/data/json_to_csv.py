@@ -25,7 +25,8 @@ for the_file in os.listdir(src):
         content = [f.read().splitlines()]
 
     # TODO - Start here.
-    new_file_path = os.path.join("csv/", the_file)
+    new_file = the_file.split('.')[1]
+    new_file_path = os.path.join("csv/", new_file)
     output = csv.writer(open(new_file_path, 'w'))
     print(content[0][0])
     output.writerow(content[0].keys())
