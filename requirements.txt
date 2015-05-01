@@ -1,0 +1,17 @@
+tweepy
+
+# for s3 interactions
+boto
+
+# for ipython notebook
+ipython
+pyzmq
+jinja2
+tornado
+jsonschema
+
+# for analysis
+pandas
+# matplotlib - this errored, we might need use Python 2.7 for analysis
+scipy
+scikit-learn
