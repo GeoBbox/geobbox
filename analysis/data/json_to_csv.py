@@ -30,6 +30,7 @@ def convert_date(date):
     return parsed_date
 
 count = 0
+
 for the_file in os.listdir(src):
 
     if not the_file.split('.')[0].endswith('(2)'):
