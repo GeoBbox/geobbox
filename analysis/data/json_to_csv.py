@@ -42,7 +42,7 @@ for the_file in os.listdir(src):
             content = f.read().splitlines()
 
         data = []
-        for item in content[:10]:
+        for item in content:
             if item:
                 d = json.loads(item)
                 data.append(d)
@@ -102,34 +102,41 @@ for the_file in os.listdir(src):
 
                 geo_type = geo.get('type')
 
-            bbox = bbox_lat1 = bbox_lat2 = bbox_long1 = bbox_long2 = None
-            bbox = rec['place']['bounding_box'].get('coordinates')
-            if bbox:
-                bbox_lat1 = bbox[0][0][1]
-                bbox_long1 = bbox[0][0][0]
-                bbox_lat2 = bbox[0][2][1]
-                bbox_long2 = bbox[0][2][0]
 
-            bbox_type = rec['place']['bounding_box'].get('type')
+            bbox = place = None
+            bbox_lat1 = bbox_lat2 = bbox_long1 = bbox_long2 = None
+            place = rec.get('place')
 
-            bbox_full_name = bbox_city = bbox_state = None
-            bbox_full_name = rec['place'].get('full_name')
-            if bbox_full_name:
-                name_split = bbox_full_name.split(',')
-                name_split = [x.strip() for x in name_split]
-                try:
-                    if name_split[1] == 'USA':
+            # Everything in section below requires place to exist. 
+            # If it doesn't that means we are missing a chunk of data
+            if place:
+
+                bbox = place['bounding_box'].get('coordinates')
+                if bbox:
+                    bbox_lat1 = bbox[0][0][1]
+                    bbox_long1 = bbox[0][0][0]
+                    bbox_lat2 = bbox[0][2][1]
+                    bbox_long2 = bbox[0][2][0]
+                bbox_type = place['bounding_box'].get('type')
+
+                bbox_full_name = bbox_city = bbox_state = None
+                bbox_full_name = place.get('full_name')
+                if bbox_full_name:
+                    name_split = bbox_full_name.split(',')
+                    name_split = [x.strip() for x in name_split]
+                    try:
+                        if name_split[1] == 'USA':
+                            bbox_city = None
+                            bbox_state = name_split[0]
+                        else:
+                            bbox_city = name_split[0]
+                            bbox_state = name_split[1]
+                    except IndexError:
                         bbox_city = None
-                        bbox_state = name_split[0]
-                    else:
-                        bbox_city = name_split[0]
-                        bbox_state = name_split[1]
-                except IndexError:
-                    bbox_city = None
-                    bbox_state = None
+                        bbox_state = None
 
-            bbox_name = rec['place'].get('name')
-            bbox_place_type = rec['place'].get('place_type')
+                bbox_name = place.get('name')
+                bbox_place_type = place.get('place_type')
 
             timestamp_ms = rec['timestamp_ms']
 
