@@ -63,6 +63,7 @@ for the_file in os.listdir(src):
         'timestamp_ms',
         'user_geo_able', 'user_id', 'user_location'
     ]
+
     output.writerow(keys)
 
     for rec in data:
@@ -102,6 +103,7 @@ for the_file in os.listdir(src):
         bbox_full_name = rec['place'].get('full_name')
         if bbox_full_name:
             name_split = bbox_full_name.split(',')
+            name_split = [x.strip() for x in name_split]
             if name_split[1] == 'USA':
                 bbox_city = None
                 bbox_state = name_split[0]
@@ -130,6 +132,7 @@ for the_file in os.listdir(src):
         ]
 
         row = [str(x) for x in row]
+
         output.writerow(row)
         count += 1
 
