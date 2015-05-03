@@ -10,27 +10,38 @@ example - micro_sample
 
 """
 import csv
+import json
 import os
 import sys
 
 src = sys.argv[1]
+out = sys.argv[2]
 
 for the_file in os.listdir(src):
     file_path = os.path.join(src, the_file)
     print(file_path)
     input = open(file_path)
 
-    content = []
     with open(file_path) as f:
-        content = [f.read().splitlines()]
+        content = f.read().splitlines()
 
-    # TODO - Start here.
-    new_file = the_file.split('.')[1]
-    new_file_path = os.path.join("csv/", new_file)
+    data = []
+    for item in content[:10]:
+        if item:
+            d = json.loads(item)
+            data.append(d)
+        # else: it is a blank line, so we don't care
+
+    new_file = the_file.split('.')[0] + '.csv'
+    new_file_path = os.path.join(out, new_file)
+
+    # make dir if it doens't exist
+    os.makedirs(out, exist_ok=True)
     output = csv.writer(open(new_file_path, 'w'))
-    print(content[0][0])
-    output.writerow(content[0].keys())
-    for rec in content:
+
+    print(data[0].keys())
+    output.writerow(data[0].keys())
+    for rec in data:
         output.writerow(rec.values())
 
     output.close()

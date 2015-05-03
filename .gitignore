@@ -1,6 +1,7 @@
 # settings
 *settings.py
 *.DS_Store
+*analysis/data/.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
