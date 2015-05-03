@@ -26,12 +26,12 @@ def convert_date(date):
     ''' Example input 'Mon Apr 27 22:35:53 +0000 2015' '''
 
     parsed_date = parser.parse(date)
-    parsed_date = time.mktime(date.timetuple())
+    parsed_date = time.mktime(parsed_date.timetuple())
     return parsed_date
 
+count = 0
 for the_file in os.listdir(src):
     file_path = os.path.join(src, the_file)
-    print(file_path)
     input = open(file_path)
 
     with open(file_path) as f:
@@ -46,14 +46,17 @@ for the_file in os.listdir(src):
 
     new_file = the_file.split('.')[0] + '.csv'
     new_file_path = os.path.join(out, new_file)
+    print(new_file_path)
 
     # make dir if it doens't exist
     os.makedirs(out, exist_ok=True)
-    output = csv.writer(open(new_file_path, 'w'))
+    csv_file = open(new_file_path, 'w')
+    output = csv.writer(csv_file)
 
     keys = [
         'id_str',
-        'coor_lat', 'coor_long', 'coorpt', 'coor_created', 'coor_whole',
+        'coor_lat', 'coor_long', 'coorpt',
+        'created', 'created_secs',
         'geo_lat', 'geo_long', 'geo_type',
         'bbox', 'bbox_type', 'bbox_full_name', 'bbox_name', 'bbox_place_type',
         'timestamp_ms',
@@ -62,8 +65,6 @@ for the_file in os.listdir(src):
     output.writerow(keys)
 
     for rec in data:
-        import pprint
-        pprint.pprint(rec)
 
         id_str = rec.get('id_str')
 
@@ -77,10 +78,11 @@ for the_file in os.listdir(src):
                 coor_long = coordinates[1]
 
             coorpt = coor.get('type')
-            coor_created = coor.get('created_at')
-            coor_whole = coor.get('created_at')
-            if coor_whole:
-                coor_whole = convert_date(coor_whole)
+
+        created = created_secs = None
+        created = rec.get('created_at')
+        if created:
+            created_secs = convert_date(created)
 
         geo = geo_lat = geo_long = None
         geo = rec.get('geo')
@@ -94,9 +96,9 @@ for the_file in os.listdir(src):
 
         bbox = rec['place']['bounding_box'].get('coordinates')
         bbox_type = rec['place']['bounding_box'].get('type')
-        bbox_full_name = rec['place']['bounding_box'].get('full_name')
-        bbox_name = rec['place']['bounding_box'].get('name')
-        bbox_place_type = rec['place']['bounding_box'].get('place_type')
+        bbox_full_name = rec['place'].get('full_name')
+        bbox_name = rec['place'].get('name')
+        bbox_place_type = rec['place'].get('place_type')
 
         timestamp_ms = rec['timestamp_ms']
 
@@ -106,7 +108,8 @@ for the_file in os.listdir(src):
 
         row = [
             id_str,
-            coor_lat, coor_long, coorpt, coor_created, coor_whole,
+            coor_lat, coor_long, coorpt,
+            created, created_secs,
             geo_lat, geo_long, geo_type,
             bbox, bbox_type, bbox_full_name, bbox_name, bbox_place_type,
             timestamp_ms,
@@ -114,7 +117,10 @@ for the_file in os.listdir(src):
         ]
 
         row = [str(x) for x in row]
-        print(row)
         output.writerow(row)
+        count += 1
 
-    print(file_path)
+        if count % 100 == 0:
+            print(count)
+
+    csv_file.close()
