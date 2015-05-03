@@ -59,7 +59,7 @@ for the_file in os.listdir(src):
         'created', 'created_secs',
         'geo_lat', 'geo_long', 'geo_type',
         'bbox', 'bbox_type',
-        'bbox_lat1', 'bbox_long1', 'bbox_lat2', 'bbox_lat2',
+        'bbox_lat1', 'bbox_long1', 'bbox_lat2', 'bbox_long2',
         'bbox_full_name', 'bbox_city', 'bbox_state',
         'bbox_name', 'bbox_place_type',
         'timestamp_ms',
@@ -78,8 +78,8 @@ for the_file in os.listdir(src):
         if coor:
             coordinates = coor.get('coordinates')
             if coordinates:
-                coor_lat = coordinates[0]
-                coor_long = coordinates[1]
+                coor_lat = coordinates[1]
+                coor_long = coordinates[0]
 
             coorpt = coor.get('type')
 
@@ -93,18 +93,18 @@ for the_file in os.listdir(src):
         if geo:
             geo_coor = geo.get('coordinates')
             if geo_coor:
-                geo_lat = geo_coor[0]
-                geo_long = geo_coor[1]
+                geo_lat = geo_coor[1]
+                geo_long = geo_coor[0]
 
             geo_type = geo.get('type')
 
         bbox = bbox_lat1 = bbox_lat2 = bbox_long1 = bbox_long2 = None
         bbox = rec['place']['bounding_box'].get('coordinates')
         if bbox:
-            bbox_lat1 = bbox[0][0][0]
-            bbox_long1 = bbox[0][0][1]
-            bbox_lat2 = bbox[0][2][0]
-            bbox_long2 = bbox[0][2][1]
+            bbox_lat1 = bbox[0][0][1]
+            bbox_long1 = bbox[0][0][0]
+            bbox_lat2 = bbox[0][2][1]
+            bbox_long2 = bbox[0][2][0]
 
         bbox_type = rec['place']['bounding_box'].get('type')
 
@@ -135,7 +135,7 @@ for the_file in os.listdir(src):
             created, created_secs,
             geo_lat, geo_long, geo_type,
             bbox, bbox_type,
-            bbox_lat1, bbox_long1, bbox_lat2, bbox_lat2,
+            bbox_lat1, bbox_long1, bbox_lat2, bbox_long2,
             bbox_full_name, bbox_city, bbox_state,
             bbox_name, bbox_place_type,
             timestamp_ms,
