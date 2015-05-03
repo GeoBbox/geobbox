@@ -93,8 +93,8 @@ for the_file in os.listdir(src):
         if geo:
             geo_coor = geo.get('coordinates')
             if geo_coor:
-                geo_lat = geo_coor[1]
-                geo_long = geo_coor[0]
+                geo_lat = geo_coor[0]
+                geo_long = geo_coor[1]
 
             geo_type = geo.get('type')
 
