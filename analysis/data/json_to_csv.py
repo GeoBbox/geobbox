@@ -2,11 +2,12 @@
 
 """
 To run this:
-python json_to_csv.py json/micro_sample
+python json_to_csv.py json/micro_sample csv/micro_sample
+python json_to_csv.py input output
 
 Then everything in micro_sample directory will turned into csvs and
-placed into the csv directory in a folder with the same name -
-example - micro_sample
+placed into the csv directory. If the folder in the csv directory doesn't
+exist, it will be created.
 
 """
 import csv
