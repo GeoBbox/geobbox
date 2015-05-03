@@ -58,7 +58,7 @@ for the_file in os.listdir(src):
         'coor_lat', 'coor_long', 'coorpt',
         'created', 'created_secs',
         'geo_lat', 'geo_long', 'geo_type',
-        'bbox', 'bbox_type', 'bbox_full_name', 'bbox_city', 'bbox_state'
+        'bbox', 'bbox_type', 'bbox_full_name', 'bbox_city', 'bbox_state',
         'bbox_name', 'bbox_place_type',
         'timestamp_ms',
         'user_geo_able', 'user_id', 'user_location'
