@@ -58,7 +58,8 @@ for the_file in os.listdir(src):
         'coor_lat', 'coor_long', 'coorpt',
         'created', 'created_secs',
         'geo_lat', 'geo_long', 'geo_type',
-        'bbox', 'bbox_type', 'bbox_full_name', 'bbox_name', 'bbox_place_type',
+        'bbox', 'bbox_type', 'bbox_full_name', 'bbox_city', 'bbox_state'
+        'bbox_name', 'bbox_place_type',
         'timestamp_ms',
         'user_geo_able', 'user_id', 'user_location'
     ]
@@ -96,7 +97,18 @@ for the_file in os.listdir(src):
 
         bbox = rec['place']['bounding_box'].get('coordinates')
         bbox_type = rec['place']['bounding_box'].get('type')
+
+        bbox_full_name = bbox_city = bbox_state = None
         bbox_full_name = rec['place'].get('full_name')
+        if bbox_full_name:
+            name_split = bbox_full_name.split(',')
+            if name_split[1] == 'USA':
+                bbox_city = None
+                bbox_state = name_split[0]
+            else:
+                bbox_city = name_split[0]
+                bbox_state = name_split[1]
+
         bbox_name = rec['place'].get('name')
         bbox_place_type = rec['place'].get('place_type')
 
@@ -111,7 +123,8 @@ for the_file in os.listdir(src):
             coor_lat, coor_long, coorpt,
             created, created_secs,
             geo_lat, geo_long, geo_type,
-            bbox, bbox_type, bbox_full_name, bbox_name, bbox_place_type,
+            bbox, bbox_type, bbox_full_name, bbox_city, bbox_state,
+            bbox_name, bbox_place_type,
             timestamp_ms,
             user_geo_able, user_id, user_location
         ]
