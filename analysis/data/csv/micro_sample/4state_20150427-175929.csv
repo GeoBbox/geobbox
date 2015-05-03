@@ -1,0 +1,6 @@
+id_str,coor_lat,coor_long,coorpt,coor_created,coor_whole,geo_lat,geo_long,geo_type,bbox,bbox_type,bbox_full_name,bbox_name,bbox_place_type,timestamp_ms,user_geo_able,user_id,user_location
+592810318788714498,None,None,None,None,None,None,None,Point,"[[[-75.7895242, 38.675286], [-75.7895242, 38.710648], [-75.743679, 38.710648], [-75.743679, 38.675286]]]",Polygon,None,None,None,1430171968539,True,2458640893,[DMV]
+592810319539470336,None,None,None,None,None,None,None,Point,"[[[-76.711517, 39.197211], [-76.711517, 39.372215], [-76.529388, 39.372215], [-76.529388, 39.197211]]]",Polygon,None,None,None,1430171968718,True,2868184895,
+592810322706182144,None,None,None,None,None,None,None,Point,"[[[-76.5803, 38.644972], [-76.5803, 38.721348], [-76.526929, 38.721348], [-76.526929, 38.644972]]]",Polygon,None,None,None,1430171969473,True,3028750637,
+592810324522311681,None,None,None,None,None,None,None,Point,"[[[-80.519851, 39.719801], [-80.519851, 42.516072], [-74.689517, 42.516072], [-74.689517, 39.719801]]]",Polygon,None,None,None,1430171969906,True,702278061,08243
+592810324660756480,None,None,None,None,None,None,None,Point,"[[[-75.586247, 39.108566], [-75.586247, 39.20982], [-75.449548, 39.20982], [-75.449548, 39.108566]]]",Polygon,None,None,None,1430171969939,True,2612313557,GKR 
