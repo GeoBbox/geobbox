@@ -23,9 +23,8 @@ with open(out, 'a') as singleFile:
                 singleFile.write(line)
                 count += 1
                 file_line_count += 1
-
-            if file_line_count == 0:
-                file_line_count += 1
             else:
-                singleFile.write(line)
-
+                if file_line_count == 0:
+                    file_line_count += 1
+                else:
+                    singleFile.write(line)
