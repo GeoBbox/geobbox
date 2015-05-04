@@ -36,7 +36,6 @@ for the_file in os.listdir(src):
     if not the_file.split('.')[0].endswith('(2)'):
 
         file_path = os.path.join(src, the_file)
-        input = open(file_path)
 
         with open(file_path) as f:
             content = f.read().splitlines()

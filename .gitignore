@@ -2,6 +2,7 @@
 *settings.py
 *.DS_Store
 *analysis/data/.DS_Store
+*analysis/data/TWEETS*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
