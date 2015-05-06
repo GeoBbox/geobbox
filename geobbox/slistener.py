@@ -8,7 +8,11 @@ from tweepy import StreamListener
 import json
 import time
 import sys
-
+def date_range(start,end):
+   current = start
+   while (end - current).days >= 0:
+      yield current
+      current = current + datetime.timedelta(seconds=1)
 
 class SListener(StreamListener):
 
